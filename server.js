@@ -13,7 +13,7 @@ const environement = require(path.join(__dirname, 'environements', 'environement
 const app = express();
 
 // cross-domain
-app.use(cors({ origin: environement.modeEnum[mode] }));
+app.use(cors({ origin: environement.dbAcces }));
 
 app.use(compression({
   level: 6, // Taux de compression compris entre -1 et 9 (-1 correspond à la valuer par défaut, 1 corespondant à la compression la plus rapide et 9 la plus comprimante)
