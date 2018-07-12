@@ -1,0 +1,28 @@
+{
+  "name": "serverapi",
+  "version": "1.0.0",
+  "description": "API Pacman-Réseau",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "node",
+    "Pacman"
+  ],
+  "author": "Jonathan Germain",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "child_process": "^1.0.2",
+    "colors": "^1.3.0",
+    "compression": "^1.7.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "path": "^0.12.7",
+    "terraformer-wkt-parser": "^1.2.0",
+    "zlib": "^1.0.5"
+  }
+}
