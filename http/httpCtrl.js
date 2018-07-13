@@ -39,24 +39,25 @@ module.exports = class HttpCtrl {
       host     : environement.dbAcces,
       user     : environement.login,
       password : environement.password,
-      database : "PACMAN-BDD"
+      database : "PACMAN_BDD",
+      insecureAuth : true
     });
     mySqlClient.connect(function(err) {
       if(err){
           console.log(err.code);
           console.log(err.fatal);
-          return;
+          return null;
       }
     });
     return mySqlClient;
   }
 
   authentifier(body, response) {
-    mySqlClient = this.createBO();
-    if(!body || !mySqlClient) {
-      response.status(502).json(`ERROR IN ${mySqlClient} or ${body}`);
+    var mySqlClient = this.createBO();
+    if(!body) {
+      response.status(502).json(`ERROR no body values`);
     }
-    var query = "INSERT INTO USER ('admin', 'admin', 0);";
+    var query = `SELECT * from user where mail='${body.login}' AND password='${body.password}';`;
     mySqlClient.query(
       query,
       function select(error, results, fields) {
@@ -67,13 +68,10 @@ module.exports = class HttpCtrl {
         }
           
         if ( results.length > 0 )  { 
-          console.log(results);
-          // var firstResult = results[0];
-          // console.log('id: ' + firstResult['id']);
-          // console.log('label: ' + firstResult['label']);
-          // console.log('valeur: ' + firstResult['valeur']);
+          response.status(200).json(results);
         } else {
           console.log("Pas de données");
+          response.status(404).json({error: 'Utilisateur non reconnu'});
         }
         mySqlClient.end();
       }
